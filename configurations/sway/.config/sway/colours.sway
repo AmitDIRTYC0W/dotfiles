@@ -1,0 +1,19 @@
+## Base16 Kanagawa
+# Author: Originally by rebelot(https://github.com/rebelot), ported by montdor (https://github.com/montdor)
+
+set $base00 #1f1f28
+set $base01 #2a2a37
+set $base02 #223249
+set $base03 #727169
+set $base04 #c8c093
+set $base05 #dcd7ba
+set $base06 #938aa9
+set $base07 #363646
+set $base08 #c34043
+set $base09 #ffa066
+set $base0A #dca561
+set $base0B #98bb6c
+set $base0C #7fb4ca
+set $base0D #7e9cd8
+set $base0E #957fb8
+set $base0F #d27e99
