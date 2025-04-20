@@ -1,13 +1,4 @@
-# theme = "base16_default"
-# theme = "acme"
-# theme = "flatwhite"
-# theme = "dracula"
-# theme = "nord"
 theme = "kanagawa"
-
-[editor]
-rulers = [100]
-
 
 [editor.terminal]
 command = "footclient"
@@ -15,6 +6,12 @@ args = [ "sh", "-c" ]
 
 [editor.cursor-shape]
 insert = "bar"
-normal = "block"
-select = "block"
 
+[keys.normal]
+"X" = ["extend_line_up", "extend_to_line_bounds"]
+
+[keys.normal."space"]
+"F" = "file_picker_in_current_buffer_directory"
+
+[keys.select]
+"X" = ["extend_line_up", "extend_to_line_bounds"]
