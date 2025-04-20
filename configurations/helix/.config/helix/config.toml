@@ -1,0 +1,20 @@
+# theme = "base16_default"
+# theme = "acme"
+# theme = "flatwhite"
+# theme = "dracula"
+# theme = "nord"
+theme = "kanagawa"
+
+[editor]
+rulers = [100]
+
+
+[editor.terminal]
+command = "footclient"
+args = [ "sh", "-c" ]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+

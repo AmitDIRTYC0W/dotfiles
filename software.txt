@@ -1,0 +1,15 @@
+fish
+foot
+gef
+helix
+htop
+hatch
+imhex
+keepassxc
+lazygit
+rizin
+sway
+yambar
+swaylock
+swayidle
+flavours

@@ -1,0 +1,159 @@
+awesome: &awesome FontAwesome:style=Regular:pixelsize=14
+awesome_brands: &awesome_brands Font Awesome 6 Brands:pixelsize=16
+fantasque_bold: &fantasque_bold Fantasque Sans:style=Bold:pixelsize=16
+
+transparent: &transparent 00000000
+kanagawa_fg: &kanagawa_fg DCD7BAFF
+kanagawa_bg: &kanagawa_bg 1F1F28FF
+kanagawa0: &kanagawa0 090618FF
+kanagawa1: &kanagawa1 C34043FF
+kanagawa4: &kanagawa4 7E9CD8FF
+kanagawa6: &kanagawa6 6A9589FF
+
+# TODO use pipewire
+
+bar:
+  height: 32
+  location: top
+  spacing: 8
+  margin: 8
+
+  font: Fantasque Sans:style=Regular:pixelsize=16
+  
+  background: *kanagawa_bg
+  foreground: *kanagawa_fg
+
+  left:
+     - i3:
+        anchors:
+          - string: &i3_common {margin: 5, on-click: "swaymsg --quiet workspace {name}"}
+          - string: &default {<<: *i3_common, text: "{name}"}
+          - focused: &focused
+              deco: {stack: [background: {color: *kanagawa6}]}
+          - invisible: &invisible {foreground: *kanagawa_fg}
+          - urgent: &urgent
+              foreground: 000000ff
+              deco: {stack: [background: {color: *kanagawa4}]}
+          - map: &i3_mode
+              default:
+                - string:
+                    margin: 5
+                    text: "{mode}"
+                    deco: {background: {color: cc421dff}}
+                - empty: {right-margin: 7}
+              conditions:
+                mode == default: {empty: {}}
+        content:
+          "":
+            map:
+              conditions:
+                state == focused:   {string: {<<: [*default, *focused]}}
+                state == unfocused: {string: {<<: *default}}
+                state == invisible: {string: {<<: [*default, *invisible]}}
+                state == urgent:    {string: {<<: [*default, *urgent]}}
+
+  center:
+    - clock:
+        date-format: "%A, %B %d"
+        time-format: "%H:%M"
+        content:
+          - string:
+              text: "{date}"
+              margin: 8
+          - string:
+              text: "{time}"
+              font: *fantasque_bold
+  right:
+    - sway-xkb:
+        identifiers: [1:1:AT_Translated_Set_2_keyboard]
+        content:
+            - string: {text: , font: *awesome}
+            - string: {text: "{layout}"}
+    - network:
+        poll-interval: 1000
+        content:
+          map:
+            default: {empty: {}}
+            conditions:
+              name == wlo1:
+                map:
+                  on-click: iwctl station wlo1 scan
+                  default: {string: {text: , font: *awesome, foreground: *kanagawa6}}
+                  conditions:
+                    state == down: {string: {text: , font: *awesome, foreground: *kanagawa6}}
+                    state == up:
+                      map:
+                        default:
+                          - string: {text: , font: *awesome}
+                          - string: {text: "{ssid}"}
+
+                        conditions:
+                          ipv4 == "":
+                            - string: {text: , font: *awesome, foreground: *kanagawa6}
+                            - string: {text: "{ssid}", foreground: *kanagawa6}
+    - alsa:
+        card: hw:PCH
+        mixer: Master
+        content:
+          map:
+            conditions:
+              ~online: {string: {text: , font: *awesome, foreground: ff0000ff}}
+              online:
+                map:
+                  conditions:
+                    muted: {string: {text: , font: *awesome, foreground: ffffff66}}
+                    ~muted:
+                      ramp:
+                        tag: percent
+                        items:
+                          - string: {text: , font: *awesome}
+                          - string: {text: , font: *awesome}
+                          - string: {text: , font: *awesome}
+    - battery:
+        name: BAT0
+        poll-interval: 30000
+        anchors:
+          discharging: &discharging
+            list:
+              items:
+                - ramp:
+                    on-click: notify-send -t 1000 {capacity}%
+                    tag: capacity
+                    items:
+                      - string: {text: , foreground: ff0000ff, font: *awesome}
+                      - string: {text: , foreground: ffa600ff, font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , font: *awesome}
+                      - string: {text: , foreground: 00ff00ff, font: *awesome}
+        content:
+          map:
+            on-click: notify-send -t 1000 {capacity}%
+            conditions:
+              state == unknown:
+                <<: *discharging
+              state == discharging:
+                <<: *discharging
+              state == charging:
+                - string: {text: , font: *awesome}
+              state == full:
+                - string: {text: , foreground: 00ff00ff, font: *awesome}
+              state == "not charging":
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: {text:  , foreground: ff0000ff, font: *awesome}
+                      - string: {text:  , foreground: ffa600ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
+
