@@ -8,7 +8,7 @@ set $down n
 set $up e
 set $right o
 
-set $term foot
+set $term footclient
 set $menu env XDG_DATA_DIRS=/var/lib/flatpak/exports/share:/home/user/.local/share/flatpak/exports/share fuzzel -T foot
 
 ### Theme
@@ -191,9 +191,9 @@ bindsym $mod+w mode "resize"
     bindsym XF86MonBrightnessDown exec doas /bin/brightnessctl s 10%-
 
 
-# Auto-start applications
-exec dex -a
 
+exec dex -a
 exec yambar
+exec foot --server
 
 include /etc/sway/config.d/*
