@@ -190,6 +190,10 @@ bindsym $mod+w mode "resize"
     bindsym XF86MonBrightnessUp exec doas /bin/brightnessctl s 10%+
     bindsym XF86MonBrightnessDown exec doas /bin/brightnessctl s 10%-
 
+    bindsym Print exec grim $HOME/Pictures/Screenshots/$(date +"%Y-%m-%d %T").png
+    bindsym Shift+Print exec grim - | wl-copy
+    bindsym $mod+Print exec grim -g "$(slurp -d)" - | wl-copy
+    bindsym $mod+Shift+Print exec grim -g "$(slurp -d)" $HOME/Pictures/Screenshots/$(date +"%Y-%m-%d %T").png
 
 
 exec dex -a
