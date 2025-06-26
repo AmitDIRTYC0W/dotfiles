@@ -1,6 +1,9 @@
 awesome: &awesome FontAwesome:style=Regular:pixelsize=14
 awesome_brands: &awesome_brands Font Awesome 6 Brands:pixelsize=16
-fantasque_bold: &fantasque_bold Fantasque Sans:style=Bold:pixelsize=16
+# font_bold: &font_bold Fantasque Sans:style=Bold:pixelsize=16
+# font_regular: &font_regular Fantasque Sans:style=Regular:pixelsize=16
+font_bold: &font_bold Iosevka:style=Bold:pixelsize=16
+font_regular: &font_regular Iosevka:style=Regular:pixelsize=16
 
 transparent: &transparent 00000000
 kanagawa_fg: &kanagawa_fg DCD7BAFF
@@ -18,7 +21,7 @@ bar:
   spacing: 8
   margin: 8
 
-  font: Fantasque Sans:style=Regular:pixelsize=16
+  font: *font_regular
   
   background: *kanagawa_bg
   foreground: *kanagawa_fg
@@ -62,7 +65,7 @@ bar:
               margin: 8
           - string:
               text: "{time}"
-              font: *fantasque_bold
+              font: *font_bold
   right:
     - sway-xkb:
         identifiers: [1:1:AT_Translated_Set_2_keyboard]
